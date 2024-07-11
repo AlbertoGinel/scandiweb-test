@@ -1,0 +1,51 @@
+GET https://localhost/DaveHollingworth/REST_API/products HTTP/1.1
+content-type: application/json
+
+###
+
+GET https://localhost/DaveHollingworth/REST_API/products/8 HTTP/1.1
+content-type: application/json
+
+###
+
+POST https://localhost/DaveHollingworth/REST_API/products/ HTTP/1.1
+content-type: application/json
+{
+  "SKU": "kik.iki",
+  "name": "Back to the Future 0.5",
+	"price": 39.99,
+	"size": 4812,
+	"type": "DVD"
+}
+
+###
+
+PATCH  https://localhost/DaveHollingworth/REST_API/products/2 HTTP/1.1
+content-type: application/json
+
+{
+  "SKU": "kikiki",
+  "name": "Back to the Future 0.5",
+	"price": 39.99,
+	"size": 4812,
+	"type": "DVD"
+}
+
+###
+
+DELETE https://localhost/DaveHollingworth/REST_API/products/10 HTTP/1.1
+content-type: application/json
+
+###
+
+
+DELETE https://localhost/DaveHollingworth/REST_API/products/ HTTP/1.1
+content-type: application/json
+
+{
+	"idList": [2,3,4]
+}
+
+
+###
+

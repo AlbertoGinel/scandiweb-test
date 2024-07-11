@@ -1,0 +1,22 @@
+RewriteEngine On
+
+# CORS headers
+
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Credentials "true"
+  Header set Access-Control-Allow-Headers "X-Requested-With, Authorization, Content-Type"
+  Header set Access-Control-Max-Age 86400
+  Header set Access-Control-Allow-Methods "GET, POST, DELETE, OPTIONS"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule .* - [R=200,L]
+</IfModule>
+
+# Redirect other requests to index.php
+RewriteRule . index.php [L]
+
+
+Header set Referrer-Policy "no-referrer"
