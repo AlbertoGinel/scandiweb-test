@@ -34,6 +34,8 @@ $id = $parts[4] ?? null;
 //TODO: move them from here
 
 $database = new Database("localhost", "my_db", "root", "");
+//host, dbname, user, password
+//$database = new Database("sql208.infinityfree.com", "if0_36889266_products", "if0_36889266", "dPqyG6EA4gHcrA ");
 
 $gateway = new ProductGateway($database);
 
@@ -44,4 +46,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
-

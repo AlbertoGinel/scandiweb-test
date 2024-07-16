@@ -16,7 +16,7 @@ RewriteEngine On
 </IfModule>
 
 # Redirect other requests to index.php
-RewriteRule . index.php [L]
 
+RewriteRule . index.php [L]
 
 Header set Referrer-Policy "no-referrer"
