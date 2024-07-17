@@ -23,13 +23,13 @@ header("Content-type: application/json; charset=UFT-8");
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
-echo "Parts: " . $parts;
+error_log("Parts: " . $parts);
 
 if($parts[3] != "products"){
-  http_response_code(404);
-  exit;
+    http_response_code(404);
+    exit;
 }
-cl
+
 $id = $parts[4] ?? null;
 
 //TODO: move them from here
