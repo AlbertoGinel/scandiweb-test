@@ -131,13 +131,21 @@ private function processCollectionRequest(string $method): void
         }
 
         if (!empty($errors)) {
-            http_response_code(207); // 207 Multi-Status
+            http_response_code(400); // 207 Multi-Status
             echo json_encode(["deleted" => $deletedIds, "errors" => $errors]);
         } else {
             http_response_code(200);
             echo json_encode(["message" => "Products deleted", "deleted" => $deletedIds]);
         }
         break;
+
+    case "OPTIONS":
+      http_response_code(200);
+      header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
+      header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+      header("Access-Control-Allow-Headers: Content-Type, Authorization");
+      echo json_encode(['message' => 'CORS preflight successful']);
+      break;
 
     default:
         http_response_code(405);
