@@ -3,7 +3,8 @@ RewriteEngine On
 # CORS headers
 
 <IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Origin "*" env=REQUEST_METHOD
+  Header set Access-Control-Allow-Origin "https://scandiweb-frontend-e087ccadb566.herokuapp.com/" env=REQUEST_METHOD:OPTIONS
   Header set Access-Control-Allow-Credentials "true"
   Header set Access-Control-Allow-Headers "X-Requested-With, Authorization, Content-Type"
   Header set Access-Control-Max-Age 86400
@@ -12,7 +13,7 @@ RewriteEngine On
 
 <IfModule mod_rewrite.c>
     RewriteCond %{REQUEST_METHOD} OPTIONS
-    RewriteRule .* - [R=200,L]
+    RewriteRule .* - [R=200,L,E=HTTP_ORIGIN:%{HTTP:Origin}]
 </IfModule>
 
 # Redirect other requests to index.php
