@@ -82,6 +82,17 @@ class ProductController
 private function processCollectionRequest(string $method): void
 {
   switch ($method) {
+
+    case "OPTIONS":
+      http_response_code(200);
+      header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
+      header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+      header("Access-Control-Allow-Headers: Content-Type, Authorization");
+      echo json_encode(['message' => 'CORS preflight successful']);
+      break;
+
+
+
     case 'GET':
         echo json_encode($this->gateway->getAll());
         break;
@@ -139,13 +150,7 @@ private function processCollectionRequest(string $method): void
         }
         break;
 
-    case "OPTIONS":
-      http_response_code(200);
-      header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
-      header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
-      header("Access-Control-Allow-Headers: Content-Type, Authorization");
-      echo json_encode(['message' => 'CORS preflight successful']);
-      break;
+
 
     default:
         http_response_code(405);
