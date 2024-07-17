@@ -16,6 +16,12 @@ spl_autoload_register(function ($class) {
     }
 });
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit();
+}
+
+
 set_error_handler("ErrorHandler::handleError");
 set_exception_handler("ErrorHandler::handleException");
 
@@ -30,10 +36,7 @@ if($parts[1] != "products"){
     ;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("HTTP/1.1 200 OK");
-    exit();
-}
+
 
 $id = $parts[4] ?? null;
 

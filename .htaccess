@@ -11,7 +11,7 @@ RewriteEngine On
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_METHOD} OPTIONS
+    # RewriteCond %{REQUEST_METHOD} OPTIONS
     RewriteRule .* - [R=200,L]
 </IfModule>
 
