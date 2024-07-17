@@ -26,7 +26,13 @@ $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
 if($parts[1] != "products"){
     http_response_code(404);
-    exit;
+    exit
+    ;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit();
 }
 
 $id = $parts[4] ?? null;
