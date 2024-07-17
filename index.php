@@ -41,11 +41,4 @@ $gateway = new ProductGateway($database);
 
 $controller = new ProductController($gateway);
 
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("HTTP/1.1 200 OK");
-    exit();
-}
-
 $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
