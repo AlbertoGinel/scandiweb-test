@@ -33,7 +33,7 @@ $id = $parts[4] ?? null;
 
 //TODO: move them from here
 
-$database = new Database("localhost", "my_db", "root", "");
+$database = new Database("r42ii9gualwp7i1y.chr7pe7iynqr.eu-west-1.rds.amazonaws.com", "q47eh5kszwn4rong", "kaxoov90gq6jix2g", "hnm4h32lfz9s5n04");
 //host, dbname, user, password
 //$database = new Database("", "", "", "");
 
