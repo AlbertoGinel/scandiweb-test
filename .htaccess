@@ -3,11 +3,11 @@ RewriteEngine On
 # CORS headers
 
 <IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "https://scandiweb-test-da56cd067ba1.herokuapp.com"
+  Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Credentials "true"
-  Header set Access-Control-Allow-Headers "X-Requested-With, Authorization, Content-Type"
+  Header set Access-Control-Allow-Headers "*"
   Header set Access-Control-Max-Age 86400
-  Header set Access-Control-Allow-Methods "GET, POST, DELETE, OPTIONS, PUT"
+  Header set Access-Control-Allow-Methods "*"
 </IfModule>
 
 <IfModule mod_rewrite.c>
