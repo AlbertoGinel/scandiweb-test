@@ -28,6 +28,16 @@ class ProductController
     }
 
     switch($method){
+
+
+      case "OPTIONS":
+        http_response_code(418);
+        header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
+        header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        exit;
+        break;
+
       case "GET":
         echo json_encode($product);
         break;
@@ -85,7 +95,7 @@ private function processCollectionRequest(string $method): void
   switch ($method) {
 
     case "OPTIONS":
-        http_response_code(200);
+        http_response_code(418);
         header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
         header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
