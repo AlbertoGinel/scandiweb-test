@@ -92,7 +92,7 @@ private function processCollectionRequest(string $method): void
         echo json_encode(['message' => 'CORS preflight successful']);
         break;
 
-    case "DELETE":
+    case "PATCH":
       $data = file_get_contents("php://input", true);
       $dataJSON = json_decode($data, true);
 
@@ -151,7 +151,7 @@ private function processCollectionRequest(string $method): void
         break;
 
     default:
-        http_response_code(418);
+        http_response_code(405);
         header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
   }
 }
