@@ -89,7 +89,7 @@ private function processCollectionRequest(string $method): void
         header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
         header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
-        echo json_encode(['message' => 'CORS preflight successful']);
+        exit;
         break;
 
     case "PATCH":
