@@ -119,7 +119,7 @@ private function processCollectionRequest(string $method): void
         ]);
         break;
 
-    case 'DELETE':
+    case 'PATCH':
         $data = file_get_contents("php://input", true);
         $dataJSON = json_decode($data, true);
 
@@ -133,17 +133,13 @@ private function processCollectionRequest(string $method): void
         $deletedIds = [];
         $errors = [];
 
-
-        $this->gateway->delete(53);
-
-
-        //foreach ($idList as $id) {
-          //  if ($this->gateway->delete($id)) {
-            //    $deletedIds[] = $id;
-           // } else {
-           //     $errors[] = "Failed to delete ID $id";
-           // }
-        //}
+        foreach ($idList as $id) {
+            if ($this->gateway->delete($id)) {
+                $deletedIds[] = $id;
+            } else {
+                $errors[] = "Failed to delete ID $id";
+         }
+        }
 
         if (!empty($errors)) {
             http_response_code(400); // 207 Multi-Status
