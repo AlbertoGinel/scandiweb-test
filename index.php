@@ -16,8 +16,12 @@ spl_autoload_register(function ($class) {
     }
 });
 
+header("Access-Control-Allow-Origin: *"); // Allow all origins
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Specify allowed methods
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    //header("HTTP/1.1 200 OK");
+    header("HTTP/1.1 200 OK");
     http_response_code(200);
     exit();
 }

@@ -102,7 +102,7 @@ private function processCollectionRequest(string $method): void
         exit;
         break;
 
-    case "PATCH":
+    case "DELETE":
       $data = file_get_contents("php://input", true);
       $dataJSON = json_decode($data, true);
 
