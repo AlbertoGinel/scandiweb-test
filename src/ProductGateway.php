@@ -53,23 +53,23 @@ switch ($product['type']) {
 }
 
 
-  public function getAll(): array
-  {
-      $sql = "SELECT * FROM products";
-      $stmt = $this->conn->query($sql);
-      $data = [];
+public function getAll(): array
+{
+    $sql = "SELECT * FROM products";
+    $stmt = $this->conn->query($sql);
+    $data = [];
 
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $product = $this->overLoadConstructor($row);
-        $data[] = $product->getFormattedData();
-    }
+    $product = $this->overLoadConstructor($row);
+    $data[] = $product->getFormattedData();
+}
 
-      return $data;
-  }
+    return $data;
+}
 
-  public function create(Product $product): string
-  {
+public function create(Product $product): string
+{
     // Initialize variables with default values
     $sku = '';
     $name = '';
@@ -133,8 +133,8 @@ switch ($product['type']) {
   }
 
 
-  public function getByID(string $id): ?array
-  {
+public function getByID(string $id): ?array
+{
     $sql = "SELECT * FROM products WHERE id = :id";
     $stmt = $this->conn->prepare($sql);
 
@@ -144,8 +144,8 @@ switch ($product['type']) {
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$data) {
-      // Product not found, return null
-      return null;
+        // Product not found, return null
+        return null;
     }
 
     // Attempt to create a product object and get formatted data
@@ -153,116 +153,116 @@ switch ($product['type']) {
     $productFinal = $product->getFormattedData();
 
     if (!$productFinal) {
-      // Formatting failed, return null
-      return null;
+        // Formatting failed, return null
+        return null;
     }
 
     return $productFinal;
-  }
+}
 
-  public function update(Product $current, Product $new): int
-  {
-      // Initialize variables with default values
-      $sku = '';
-      $name = '';
-      $price = 0;
-      $size = null;
-      $weight = null;
-      $height = null;
-      $width = null;
-      $length = null;
-      $type = '';
-  
-      // Check if getter methods exist and call them if they do
-      if (method_exists($new, 'getSku')) {
-          $sku = $new->getSku();
-      } elseif (method_exists($current, 'getSku')) {
-          $sku = $current->getSku();
-      }
-  
-      if (method_exists($new, 'getName')) {
-          $name = $new->getName();
-      } elseif (method_exists($current, 'getName')) {
-          $name = $current->getName();
-      }
-  
-      if (method_exists($new, 'getPrice')) {
-          $price = $new->getPrice();
-      } elseif (method_exists($current, 'getPrice')) {
-          $price = $current->getPrice();
-      }
-  
-      if (method_exists($new, 'getSize')) {
-          $size = $new->getSize();
-      } elseif (method_exists($current, 'getSize')) {
-          $size = $current->getSize();
-      }
-  
-      if (method_exists($new, 'getWeight')) {
-          $weight = $new->getWeight();
-      } elseif (method_exists($current, 'getWeight')) {
-          $weight = $current->getWeight();
-      }
-  
-      if (method_exists($new, 'getHeight')) {
-          $height = $new->getHeight();
-      } elseif (method_exists($current, 'getHeight')) {
-          $height = $current->getHeight();
-      }
-  
-      if (method_exists($new, 'getWidth')) {
-          $width = $new->getWidth();
-      } elseif (method_exists($current, 'getWidth')) {
-          $width = $current->getWidth();
-      }
-  
-      if (method_exists($new, 'getLength')) {
-          $length = $new->getLength();
-      } elseif (method_exists($current, 'getLength')) {
-          $length = $current->getLength();
-      }
-  
-      if (method_exists($new, 'getType')) {
-          $type = $new->getType();
-      } elseif (method_exists($current, 'getType')) {
-          $type = $current->getType();
-      }
-  
-      // Proceed with database update using the variables
-      $sql = "UPDATE products
-              SET SKU = :SKU,
-                  name = :name,
-                  price = :price,
-                  size = :size,
-                  weight = :weight,
-                  height = :height,
-                  width = :width,
-                  length = :length,
-                  type = :type
-              WHERE id = :id";
-  
-      $stmt = $this->conn->prepare($sql);
-  
-      $stmt->bindValue(":SKU", $sku, PDO::PARAM_STR);
-      $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-      $stmt->bindValue(":price", $price ?? 0, PDO::PARAM_STR);
-      $stmt->bindValue(":size", $size ?? NULL, PDO::PARAM_INT);
-      $stmt->bindValue(":weight", $weight ?? NULL, PDO::PARAM_STR);
-      $stmt->bindValue(":height", $height ?? NULL, PDO::PARAM_INT);
-      $stmt->bindValue(":width", $width ?? NULL, PDO::PARAM_INT);
-      $stmt->bindValue(":length", $length ?? NULL, PDO::PARAM_INT);
-      $stmt->bindValue(":type", $type, PDO::PARAM_STR);
-  
-      $stmt->bindValue(":id", $current->getId(), PDO::PARAM_INT); // Assuming getId() exists
-  
-      $stmt->execute();
-  
-      return $stmt->rowCount();
-  }
-  
+public function update(Product $current, Product $new): int
+{
+    // Initialize variables with default values
+    $sku = '';
+    $name = '';
+    $price = 0;
+    $size = null;
+    $weight = null;
+    $height = null;
+    $width = null;
+    $length = null;
+    $type = '';
 
-  public function delete(string $id): int
-  {
+    // Check if getter methods exist and call them if they do
+    if (method_exists($new, 'getSku')) {
+        $sku = $new->getSku();
+    } elseif (method_exists($current, 'getSku')) {
+        $sku = $current->getSku();
+    }
+
+    if (method_exists($new, 'getName')) {
+        $name = $new->getName();
+    } elseif (method_exists($current, 'getName')) {
+        $name = $current->getName();
+    }
+
+    if (method_exists($new, 'getPrice')) {
+        $price = $new->getPrice();
+    } elseif (method_exists($current, 'getPrice')) {
+        $price = $current->getPrice();
+    }
+
+    if (method_exists($new, 'getSize')) {
+        $size = $new->getSize();
+    } elseif (method_exists($current, 'getSize')) {
+        $size = $current->getSize();
+    }
+
+    if (method_exists($new, 'getWeight')) {
+        $weight = $new->getWeight();
+    } elseif (method_exists($current, 'getWeight')) {
+        $weight = $current->getWeight();
+    }
+
+    if (method_exists($new, 'getHeight')) {
+        $height = $new->getHeight();
+    } elseif (method_exists($current, 'getHeight')) {
+        $height = $current->getHeight();
+    }
+
+    if (method_exists($new, 'getWidth')) {
+        $width = $new->getWidth();
+    } elseif (method_exists($current, 'getWidth')) {
+        $width = $current->getWidth();
+    }
+
+    if (method_exists($new, 'getLength')) {
+        $length = $new->getLength();
+    } elseif (method_exists($current, 'getLength')) {
+        $length = $current->getLength();
+    }
+
+    if (method_exists($new, 'getType')) {
+        $type = $new->getType();
+    } elseif (method_exists($current, 'getType')) {
+        $type = $current->getType();
+    }
+
+    // Proceed with database update using the variables
+    $sql = "UPDATE products
+            SET SKU = :SKU,
+                name = :name,
+                price = :price,
+                size = :size,
+                weight = :weight,
+                height = :height,
+                width = :width,
+                length = :length,
+                type = :type
+            WHERE id = :id";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->bindValue(":SKU", $sku, PDO::PARAM_STR);
+    $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+    $stmt->bindValue(":price", $price ?? 0, PDO::PARAM_STR);
+    $stmt->bindValue(":size", $size ?? NULL, PDO::PARAM_INT);
+    $stmt->bindValue(":weight", $weight ?? NULL, PDO::PARAM_STR);
+    $stmt->bindValue(":height", $height ?? NULL, PDO::PARAM_INT);
+    $stmt->bindValue(":width", $width ?? NULL, PDO::PARAM_INT);
+    $stmt->bindValue(":length", $length ?? NULL, PDO::PARAM_INT);
+    $stmt->bindValue(":type", $type, PDO::PARAM_STR);
+
+    $stmt->bindValue(":id", $current->getId(), PDO::PARAM_INT); // Assuming getId() exists
+
+    $stmt->execute();
+
+    return $stmt->rowCount();
+}
+
+
+public function delete(string $id): int
+{
     $sql = "DELETE FROM products WHERE id = :id";
 
     $stmt = $this->conn->prepare($sql);
@@ -272,6 +272,6 @@ switch ($product['type']) {
     $stmt->execute();
 
     return $stmt->rowCount();
-  }
+}
 
 }
