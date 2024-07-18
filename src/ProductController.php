@@ -44,8 +44,6 @@ class ProductController
       case "PATCH":
         $data = file_get_contents("php://input", true);
 
-        //var_dump($data);
-
         $dataJSON = (array) json_decode($data);
 
         var_dump($dataJSON);
@@ -92,9 +90,6 @@ class ProductController
 private function processCollectionRequest(string $method): void
 {
 
-
-  
-
   switch ($method) {
 
     case "OPTIONS":
@@ -106,6 +101,8 @@ private function processCollectionRequest(string $method): void
         break;
 
     case "DELETE":
+
+      echo json_encode(["donde?" => "entramos en delete!"]);
 
       $data = file_get_contents("php://input", true);
       $dataJSON = json_decode($data, true);
