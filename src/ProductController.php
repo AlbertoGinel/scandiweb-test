@@ -107,9 +107,6 @@ private function processCollectionRequest(string $method): void
 
     case "DELETE":
 
-
-      echo json_encode(["In delete" => $method]);
-
       $data = file_get_contents("php://input", true);
       $dataJSON = json_decode($data, true);
 
