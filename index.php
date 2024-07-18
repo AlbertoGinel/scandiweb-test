@@ -17,7 +17,8 @@ spl_autoload_register(function ($class) {
 });
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("HTTP/1.1 200 OK");
+    //header("HTTP/1.1 200 OK");
+    http_response_code(200);
     exit();
 }
 
