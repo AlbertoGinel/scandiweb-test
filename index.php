@@ -19,7 +19,7 @@ spl_autoload_register(function ($class) {
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("HTTP/1.1 200 OK");
     http_response_code(200);
-    exit();
+    //exit();
 }
 
 
@@ -33,8 +33,7 @@ $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
 if($parts[1] != "products"){
     http_response_code(404);
-    exit
-    ;
+    exit;
 }
 
 
