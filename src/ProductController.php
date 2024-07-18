@@ -133,13 +133,17 @@ private function processCollectionRequest(string $method): void
         $deletedIds = [];
         $errors = [];
 
-        foreach ($idList as $id) {
-            if ($this->gateway->delete($id)) {
-                $deletedIds[] = $id;
-            } else {
-                $errors[] = "Failed to delete ID $id";
-            }
-        }
+
+        $this->gateway->delete(53);
+
+
+        //foreach ($idList as $id) {
+          //  if ($this->gateway->delete($id)) {
+            //    $deletedIds[] = $id;
+           // } else {
+           //     $errors[] = "Failed to delete ID $id";
+           // }
+        //}
 
         if (!empty($errors)) {
             http_response_code(400); // 207 Multi-Status
