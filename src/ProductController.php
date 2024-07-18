@@ -72,8 +72,8 @@ class ProductController
         break;
 
       default:
-        http_response_code(405);
-        header("Allow: GET, PATCH, DELETE");
+        http_response_code(418);
+        header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
     }
 
 

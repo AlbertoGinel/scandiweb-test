@@ -1,4 +1,4 @@
-GET https://localhost/DaveHollingworth/REST_API/products HTTP/1.1
+GET https://scandiweb-test-da56cd067ba1.herokuapp.com/products HTTP/1.1
 content-type: application/json
 
 ###
@@ -20,15 +20,20 @@ content-type: application/json
 
 ###
 
-PATCH  https://scandiweb-test-da56cd067ba1.herokuapp.com/products/53 HTTP/1.1
+PATCH  https://scandiweb-test-da56cd067ba1.herokuapp.com/products/54 HTTP/1.1
 content-type: application/json
 
 {
-  "SKU": "kikiki",
+  "SKU": "eseto",
   "name": "Back to the Future 0.5",
 	"price": 39.99,
 	"size": 4812,
-	"type": "DVD"
+	"type": "DVD",
+	"weight": null,
+	"height": null,
+	"width": null,
+	"length": null,
+
 }
 
 ###
@@ -53,7 +58,7 @@ DELETE https://scandiweb-test-da56cd067ba1.herokuapp.com/products/ HTTP/1.1
 content-type: application/json
 
 {
-	"idList": []
+	"idList": [53]
 }
 
 
