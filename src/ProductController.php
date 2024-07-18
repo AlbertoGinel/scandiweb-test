@@ -151,7 +151,7 @@ private function processCollectionRequest(string $method): void
 
     default:
         http_response_code(405);
-        header("Allow: GET, POST, DELETE, OPTIONS");
+        header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
   }
 }
 

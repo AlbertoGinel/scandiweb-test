@@ -20,7 +20,7 @@ content-type: application/json
 
 ###
 
-PATCH  https://localhost/DaveHollingworth/REST_API/products/2 HTTP/1.1
+PATCH  https://scandiweb-test-da56cd067ba1.herokuapp.com/products/53 HTTP/1.1
 content-type: application/json
 
 {
