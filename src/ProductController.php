@@ -9,9 +9,6 @@ class ProductController
 
   public function processRequest(string $method, ?string $id):void
   {
-
-    echo json_encode(["method" => $method, "id" => $id]);
-
     if($id){
       $this->processResourceRequest($method, $id);
     }else{
