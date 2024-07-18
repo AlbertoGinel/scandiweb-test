@@ -72,7 +72,7 @@ class ProductController
         break;
 
       default:
-        http_response_code(418);
+        http_response_code(405);
         header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
     }
 
@@ -150,7 +150,7 @@ private function processCollectionRequest(string $method): void
         break;
 
     default:
-        http_response_code(405);
+        http_response_code(418);
         header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
   }
 }
