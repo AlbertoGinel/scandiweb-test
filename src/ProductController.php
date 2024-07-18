@@ -10,6 +10,8 @@ class ProductController
   public function processRequest(string $method, ?string $id):void
   {
 
+    echo json_encode(["method" => $method, "method" => $id]);
+
     if($id){
       $this->processResourceRequest($method, $id);
     }else{
@@ -102,7 +104,7 @@ private function processCollectionRequest(string $method): void
         exit;
         break;
 
-    case "PATCH":
+    case "DELETE":
       $data = file_get_contents("php://input", true);
       $dataJSON = json_decode($data, true);
 
