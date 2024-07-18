@@ -10,7 +10,7 @@ class ProductController
   public function processRequest(string $method, ?string $id):void
   {
 
-    echo json_encode(["method" => $method, "method" => $id]);
+    echo json_encode(["method" => $method, "id" => $id]);
 
     if($id){
       $this->processResourceRequest($method, $id);
@@ -34,7 +34,7 @@ class ProductController
 
       case "OPTIONS":
         http_response_code(418);
-        header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
+        header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
         exit;
