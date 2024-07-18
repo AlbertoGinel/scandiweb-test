@@ -91,6 +91,10 @@ class ProductController
 
 private function processCollectionRequest(string $method): void
 {
+
+
+  echo json_encode(["method in processCollectionRequest" => $method]);
+
   switch ($method) {
 
     case "OPTIONS":
