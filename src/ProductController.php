@@ -84,13 +84,43 @@ private function processCollectionRequest(string $method): void
   switch ($method) {
 
     case "OPTIONS":
-      http_response_code(200);
-      header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
-      header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
-      header("Access-Control-Allow-Headers: Content-Type, Authorization");
-      echo json_encode(['message' => 'CORS preflight successful']);
-      break;
+        http_response_code(200);
+        header("Access-Control-Allow-Origin: *"); // Adjust this to match your CORS policy
+        header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        echo json_encode(['message' => 'CORS preflight successful']);
+        break;
 
+    case "DELETE":
+      $data = file_get_contents("php://input", true);
+      $dataJSON = json_decode($data, true);
+
+      if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
+          http_response_code(400);
+          echo json_encode(["error" => "Invalid input, expected 'idList' as an array"]);
+          break;
+      }
+
+      $idList = $dataJSON['idList'];
+      $deletedIds = [];
+      $errors = [];
+
+      foreach ($idList as $id) {
+          if ($this->gateway->delete($id)) {
+              $deletedIds[] = $id;
+          } else {
+              $errors[] = "Failed to delete ID $id";
+        }
+      }
+
+      if (!empty($errors)) {
+          http_response_code(400); // 207 Multi-Status
+          echo json_encode(["deleted" => $deletedIds, "errors" => $errors]);
+      } else {
+          http_response_code(200);
+          echo json_encode(["message" => "Products deleted", "deleted" => $deletedIds]);
+      }
+      break;
 
 
     case 'GET':
@@ -118,39 +148,6 @@ private function processCollectionRequest(string $method): void
             "id" => $id
         ]);
         break;
-
-    case 'DELETE':
-        $data = file_get_contents("php://input", true);
-        $dataJSON = json_decode($data, true);
-
-        if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input, expected 'idList' as an array"]);
-            break;
-        }
-
-        $idList = $dataJSON['idList'];
-        $deletedIds = [];
-        $errors = [];
-
-        foreach ($idList as $id) {
-            if ($this->gateway->delete($id)) {
-                $deletedIds[] = $id;
-            } else {
-                $errors[] = "Failed to delete ID $id";
-         }
-        }
-
-        if (!empty($errors)) {
-            http_response_code(400); // 207 Multi-Status
-            echo json_encode(["deleted" => $deletedIds, "errors" => $errors]);
-        } else {
-            http_response_code(200);
-            echo json_encode(["message" => "Products deleted", "deleted" => $deletedIds]);
-        }
-        break;
-
-
 
     default:
         http_response_code(405);
