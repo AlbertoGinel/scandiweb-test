@@ -38,7 +38,7 @@ if($parts[1] != "products"){
 
 
 
-$id = $parts[4] ?? null;
+$id = $parts[2] ?? null;
 
 //TODO: move them from here
 

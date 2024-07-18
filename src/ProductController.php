@@ -9,6 +9,7 @@ class ProductController
 
   public function processRequest(string $method, ?string $id):void
   {
+
     if($id){
       $this->processResourceRequest($method, $id);
     }else{
