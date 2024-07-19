@@ -145,10 +145,7 @@ private function processCollectionRequest(string $method): void
       
       if (isset($dataJSON['idList'])) {
 
-
-        echo json_encode(["idList" => $dataJSON['idList']]);
-
-
+        echo json_encode(["delete" => "delete"]);
 
           if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
               http_response_code(400);
@@ -176,6 +173,8 @@ private function processCollectionRequest(string $method): void
               echo json_encode(["message" => "Products deleted", "deleted" => $deletedIds]);
           }
           break;
+
+
       } else {
           $newProduct = $this->gateway->overLoadConstructor($dataJSON);
           $errors = $newProduct->getValidationErrors();
