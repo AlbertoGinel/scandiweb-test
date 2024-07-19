@@ -100,7 +100,7 @@ private function processCollectionRequest(string $method): void
         exit;
         break;
 
-    case "HEAD":
+    case "DELETE":
 
       //echo json_encode(["donde?" => "entramos en delete!"]);
 
