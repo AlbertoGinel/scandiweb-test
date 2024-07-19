@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // List allowed methods
     header('Access-Control-Allow-Headers: Content-Type, Authorization'); // List allowed headers
     header('Access-Control-Max-Age: 86400'); // Cache preflight response for 1 day
-    http_response_code(200); // Respond with 200 OK
+    http_response_code(418); // Respond with 200 OK
     exit();
 }
 
