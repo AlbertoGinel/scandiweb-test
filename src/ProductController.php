@@ -129,6 +129,8 @@ class ProductController
 
                 if (isset($dataJSON['idList'])) {
 
+                    http_response_code(418);
+
                     if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
                         http_response_code(400);
                         echo json_encode(["error" => "Invalid input, expected 'idList' as an array"]);
