@@ -17,9 +17,11 @@ spl_autoload_register(function ($class) {
 });
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("HTTP/1.1 200 OK");
-    http_response_code(200);
-    echo json_encode(["hay" => "options!"]);
+    header('Access-Control-Allow-Origin: *'); // Replace '*' with specific origin if needed
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // List allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // List allowed headers
+    header('Access-Control-Max-Age: 86400'); // Cache preflight response for 1 day
+    http_response_code(200); // Respond with 200 OK
     exit();
 }
 

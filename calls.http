@@ -63,3 +63,9 @@ content-type: application/json
 
 ###
 
+OPTIONS   https://scandiweb-test-da56cd067ba1.herokuapp.com/products/ HTTP/1.1
+content-type: application/json
+
+
+###
+
