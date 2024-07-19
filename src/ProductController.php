@@ -145,8 +145,6 @@ private function processCollectionRequest(string $method): void
       
       if (isset($dataJSON['idList'])) {
 
-        echo json_encode(["delete" => "delete"]);
-
           if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
               http_response_code(400);
               echo json_encode(["error" => "Invalid input, expected 'idList' as an array"]);
