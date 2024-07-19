@@ -191,11 +191,6 @@ if (isset($dataJSON['idList'])) {
     break; // Exit the switch case
 }
 
-
-
-
-}
-
   private function getValidationErrors(string $data): array
   {
       $errors = [];
