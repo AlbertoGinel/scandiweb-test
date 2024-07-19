@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+
+    echo json_encode(["it is"=>"options"]);
+
+    header('Access-Control-Allow-Origin: *'); // Replace '*' with specific origin if needed
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // List allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // List allowed headers
+    header('Access-Control-Max-Age: 86400'); // Cache preflight response for 1 day
+    http_response_code(418); // Respond with 200 OK
+    exit();
+}
+
 spl_autoload_register(function ($class) {
     $paths = [
         __DIR__ . "/src/$class.php",
@@ -16,17 +28,6 @@ spl_autoload_register(function ($class) {
     }
 });
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-
-    echo json_encode(["it is"=>"options"]);
-
-    header('Access-Control-Allow-Origin: *'); // Replace '*' with specific origin if needed
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // List allowed methods
-    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // List allowed headers
-    header('Access-Control-Max-Age: 86400'); // Cache preflight response for 1 day
-    http_response_code(418); // Respond with 200 OK
-    exit();
-}
 
 
 set_error_handler("ErrorHandler::handleError");

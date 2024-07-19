@@ -3,7 +3,7 @@ content-type: application/json
 
 ###
 
-GET https://scandiweb-test-da56cd067ba1.herokuapp.com/products/8 HTTP/1.1
+GET https://scandiweb-test-da56cd067ba1.herokuapp.com/products/20 HTTP/1.1
 content-type: application/json
 
 ###
@@ -55,11 +55,11 @@ content-type: application/json
 
 ###
 
-POST  https://scandiweb-test-da56cd067ba1.herokuapp.com/products/ HTTP/1.1
+DELETE  https://scandiweb-test-da56cd067ba1.herokuapp.com/products/ HTTP/1.1
 content-type: application/json
 
 {
-	"idList": [58]
+	"idList": [60, 59]
 }
 
 ###
