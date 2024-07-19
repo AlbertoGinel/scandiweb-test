@@ -18,8 +18,6 @@ spl_autoload_register(function ($class) {
     }
 });
 
-echo json_encode(["we are "=>"in php"]);
-
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
     echo json_encode(["it is"=>"options"]);
