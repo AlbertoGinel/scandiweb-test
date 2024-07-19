@@ -143,7 +143,7 @@ private function processCollectionRequest(string $method): void
         $data = file_get_contents("php://input", true);
         $dataJSON = (array) json_decode($data);
 
-        if (array_key_exists('idList', $dataJSON)) {
+        if (!array_key_exists('idList', $dataJSON)) {
 
           $newProduct = $this->gateway->overLoadConstructor($dataJSON);
           $errors = $newProduct->getValidationErrors();
