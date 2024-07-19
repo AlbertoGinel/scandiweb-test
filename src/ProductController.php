@@ -140,31 +140,69 @@ private function processCollectionRequest(string $method): void
         break;
 
     case 'POST':
-        $data = file_get_contents("php://input", true);
-        $dataJSON = (array) json_decode($data);
-
+      $data = file_get_contents("php://input", true);
+      $dataJSON = (array) json_decode($data);
+      
+      if (isset($dataJSON['idList'])) {
+          if (!isset($dataJSON['idList']) || !is_array($dataJSON['idList'])) {
+              http_response_code(400);
+              echo json_encode(["error" => "Invalid input, expected 'idList' as an array"]);
+              break;
+          }
+      
+          $idList = $dataJSON['idList'];
+          $deletedIds = [];
+          $errors = [];
+      
+          foreach ($idList as $id) {
+              if ($this->gateway->delete($id)) {
+                  $deletedIds[] = $id;
+              } else {
+                  $errors[] = "Failed to delete ID $id";
+              }
+          }
+      
+          if (!empty($errors)) {
+              http_response_code(400); // 207 Multi-Status
+              echo json_encode(["deleted" => $deletedIds, "errors" => $errors]);
+          } else {
+              http_response_code(200);
+              echo json_encode(["message" => "Products deleted", "deleted" => $deletedIds]);
+          }
+          break;
+      } else {
           $newProduct = $this->gateway->overLoadConstructor($dataJSON);
           $errors = $newProduct->getValidationErrors();
-
+      
+          // Check for validation errors
           if (!empty($errors)) {
               http_response_code(422);
               echo json_encode(["errors" => $errors]);
-              break;
+              break; // Exit the switch case
           }
-
+      
+          // Attempt to create the product
           $id = $this->gateway->create($newProduct);
-
+      
+          // Respond with success message and product ID
           http_response_code(201);
           echo json_encode([
               "message" => "Product created",
               "id" => $id
           ]);
-          break;
+          break; // Exit the switch case
+      }
+      
+      }
 
     default:
         http_response_code(405);
         header("Allow: GET, POST, DELETE, OPTIONS, PATCH");
   }
+
+
+
+
 }
 
   private function getValidationErrors(string $data): array
