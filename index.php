@@ -17,6 +17,9 @@ spl_autoload_register(function ($class) {
 });
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+
+    echo json_encode(["it is"=>"options"]);
+
     header('Access-Control-Allow-Origin: *'); // Replace '*' with specific origin if needed
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // List allowed methods
     header('Access-Control-Allow-Headers: Content-Type, Authorization'); // List allowed headers
