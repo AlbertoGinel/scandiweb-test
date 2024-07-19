@@ -135,12 +135,12 @@ class ProductController
                         break;
                     }
 
-                    $idList = [72]; //$dataJSON['idList'];
+                    $idList = $dataJSON['idList'];
                     $deletedIds = [];
                     $errors = [];
 
                     foreach ($idList as $id) {
-                        if ($this->gateway->delete($id)) {
+                        if ($this->gateway->delete( (string) $id)) {
                             $deletedIds[] = $id;
                         } else {
                             $errors[] = "Failed to delete ID $id";
