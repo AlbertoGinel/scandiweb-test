@@ -134,7 +134,7 @@ class ProductController
                         break;
                     }
 
-                    $idList = 29; //= $dataJSON['idList'];
+                    $idList = [29]; //= $dataJSON['idList'];
                     $deletedIds = [];
                     $errors = [];
 
