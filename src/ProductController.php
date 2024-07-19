@@ -192,8 +192,6 @@ private function processCollectionRequest(string $method): void
           ]);
           break; // Exit the switch case
       }
-      
-      }
 
     default:
         http_response_code(405);
